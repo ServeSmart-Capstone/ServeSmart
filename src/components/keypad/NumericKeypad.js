@@ -25,7 +25,14 @@ const NumericKeypad = () => {
   return (
     <View style={styles.container}>
       <View style={styles.idDisplay}>
-        <Text style={styles.idNumber}>{keypadEntry}</Text>
+        <Text
+          style={
+            keypadEntry === 'Enter ID'
+              ? [styles.idNumber, {color: colors.darkGray}]
+              : styles.idNumber
+          }>
+          {keypadEntry}
+        </Text>
       </View>
 
       <View style={styles.buttonsContainer}>
@@ -52,7 +59,7 @@ const NumericKeypad = () => {
             style={styles.button}
             onPress={clearEntry}
             underlayColor={colors.lightGreen}>
-            <Text style={styles.buttonText}>CLR</Text>
+            <Text style={styles.buttonText}>CR</Text>
           </TouchableHighlight>
           <KeypadButton onPress={keyPressed} value="0" />
           <TouchableHighlight

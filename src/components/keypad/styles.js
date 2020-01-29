@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: colors.black,
     fontFamily: 'Roboto',
-    fontSize: 20,
+    fontSize: 26,
     fontStyle: 'normal',
   },
 });
