@@ -9,10 +9,9 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    // backgroundColor: colors.darkGray,
     borderBottomColor: colors.lightGray,
     borderBottomWidth: 1,
-    height: 144,
+    height: 136,
     padding: 18,
   },
 
@@ -40,6 +39,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     zIndex: -1,
+  },
+
+  keypadContainer: {
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

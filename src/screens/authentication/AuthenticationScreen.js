@@ -3,10 +3,10 @@ import {ImageBackground, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 // import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';s
+// import {connect} from 'react-redux';
 // import PropTypes from 'prop-types';
 // import * as loginActions from '../../redux/actions/loginActions';
-// import NumericKeypad from 'components/keypad/NumericKeypad';
+import NumericKeypad from 'components/keypad/NumericKeypad';
 import images from 'assets/images';
 import {gradient} from './styles';
 import styles from './styles';
@@ -14,6 +14,12 @@ import styles from './styles';
 const AuthenticationScreen = props => {
   return (
     <View style={styles.container}>
+      {/* IMAGE BACKGROUND */}
+      <ImageBackground
+        style={styles.imageBackground}
+        source={images.authscreen_background}
+      />
+
       {/* HEADER */}
       <LinearGradient
         style={styles.header}
@@ -25,11 +31,10 @@ const AuthenticationScreen = props => {
         </View>
       </LinearGradient>
 
-      {/* IMAGE BACKGROUND */}
-      <ImageBackground
-        style={styles.imageBackground}
-        source={images.authscreen_background}
-      />
+      {/* KEYPAD */}
+      <View style={styles.keypadContainer}>
+        <NumericKeypad />
+      </View>
     </View>
   );
 };
