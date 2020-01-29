@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderStyle: 'solid',
     borderWidth: 1,
+    opacity: 0.9,
     padding: 10,
     width: 260,
   },
