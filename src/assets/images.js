@@ -1,5 +1,5 @@
 const images = {
-  auth_screen_background: require('./img/authscreen_juice.jpg'),
+  authscreen_background: require('./img/authscreen_background.jpg'),
 };
 
 export default images;

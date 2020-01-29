@@ -1,55 +1,40 @@
 import React from 'react';
+import {ImageBackground, Text, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 // import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
+// import {connect} from 'react-redux';s
 // import PropTypes from 'prop-types';
-import {ImageBackground, Text, TouchableHighlight, View} from 'react-native';
 // import * as loginActions from '../../redux/actions/loginActions';
-// import NumericKeypad from '../../components/keypad/NumericKeypad';
+// import NumericKeypad from 'components/keypad/NumericKeypad';
 import images from 'assets/images';
+import {gradient} from './styles';
 import styles from './styles';
 
 const AuthenticationScreen = props => {
-  // const openKeypad = event => {
-  //   event.preventDefault();
-  //   props.actions.toggleKeypad(true);
-  // };
-
-  // const closeKeypad = () => {
-  //   props.actions.toggleKeypad(false);
-  // };
-
   return (
     <View style={styles.container}>
       {/* HEADER */}
-      <View style={styles.header}>
-        <Text style={styles.restaurantName}>Restaurant Name</Text>
-      </View>
-
-      {/* SIGN IN BUTTON */}
-      <TouchableHighlight style={styles.loginButton} underlayColor="gray">
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableHighlight>
+      <LinearGradient
+        style={styles.header}
+        colors={gradient}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}>
+        <View style={styles.hero}>
+          <Text style={styles.heroText}>ServeSmart</Text>
+        </View>
+      </LinearGradient>
 
       {/* IMAGE BACKGROUND */}
       <ImageBackground
-        style={styles.image}
-        source={images.auth_screen_background}
+        style={styles.imageBackground}
+        source={images.authscreen_background}
       />
-
-      {/* KEYPAD */}
-      {/* <Dialog open={props.keypad.isOpen} onClose={closeKeypad}>
-        <NumericKeypad />
-      </Dialog> */}
     </View>
   );
 };
 
-// AuthenticationScreen.propTypes = {
-//   keypad: PropTypes.shape({
-//     isOpen: PropTypes.bool.isRequired,
-//   }).isRequired,
-//   actions: PropTypes.object.isRequired,
-// };
+AuthenticationScreen.propTypes = {};
 
 // function mapStateToProps(state) {
 //   const storeData = state.loginReducer;
