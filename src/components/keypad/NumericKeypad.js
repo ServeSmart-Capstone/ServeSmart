@@ -21,18 +21,22 @@ const NumericKeypad = props => {
 
   const submitEntry = event => {
     event.preventDefault();
+    //const {login} = props.login;
+
     //Handle authentication here
+    if (isNaN(keypadEntry)) {
+      //clear pin if invalid
+      clearEntry();
+    } else {
+      //Async obtain user data from DB if valid
+      const user = {
+        id: keypadEntry,
+        name: 'Chase Pareti',
+      };
 
-    //if verified
-    //trigger successful login
-    props.login({
-      id: '696969',
-      name: 'Chase Pareti',
-    });
-
-    //else
-    //clearEntry()
-    //maybe give message? shake keypad?
+      //log user in
+      props.login(user);
+    }
   };
 
   return (

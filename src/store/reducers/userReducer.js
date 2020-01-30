@@ -1,22 +1,22 @@
 import * as types from 'constants/actionTypes';
 
 const initialState = {
-  employee: {
+  user: {
     id: '',
     name: '',
   },
 };
 
-export default function loginReducer(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
     //Successful login
-    case types.LOGIN: {
+    case types.LOAD_USER_DATA: {
       return {
         ...state,
-        employee: {
-          ...state.employee,
-          id: action.employeeData.id,
-          name: action.employeeData.name,
+        user: {
+          ...state.user,
+          id: action.userData.id,
+          name: action.userData.name,
         },
       };
     }

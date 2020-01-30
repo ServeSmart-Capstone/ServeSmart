@@ -1,2 +1,2 @@
-// Login actions
-export const LOGIN = 'LOGIN';
+// User actions
+export const LOAD_USER_DATA = 'LOAD_USER_DATA';

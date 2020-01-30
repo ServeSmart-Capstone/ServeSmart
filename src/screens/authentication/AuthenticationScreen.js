@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as loginActions from '../../redux/actions/loginActions';
+import * as userActions from 'store/actions/userActions';
 
 import NumericKeypad from 'components/keypad/NumericKeypad';
 import images from 'assets/images';
@@ -12,9 +12,9 @@ import {gradient} from './styles';
 import styles from './styles';
 
 const AuthenticationScreen = props => {
-  const emplogin = data => {
-    props.actions.login(data);
-    props.navigation.navigate('Home', {name: data.name, info: props.employee});
+  const userLogin = user => {
+    props.actions.loadUserData(user);
+    props.navigation.navigate('Home', {name: user.name});
   };
 
   return (
@@ -38,7 +38,7 @@ const AuthenticationScreen = props => {
 
       {/* KEYPAD */}
       <View style={styles.keypadContainer}>
-        <NumericKeypad login={emplogin} />
+        <NumericKeypad login={userLogin} />
       </View>
     </View>
   );
@@ -49,31 +49,15 @@ AuthenticationScreen.navigationOptions = {
 };
 
 AuthenticationScreen.propTypes = {
-  employee: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
-  actions: PropTypes.object.isRequired,
+  actions: PropTypes.shape({
+    loadUserData: PropTypes.func.isRequired,
+  }).isRequired,
 };
-
-function mapStateToProps(state) {
-  const storeData = state.loginReducer;
-
-  return {
-    employee: {
-      id: storeData.employee.id,
-      name: storeData.employee.name,
-    },
-  };
-}
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(loginActions, dispatch),
+    actions: bindActionCreators(userActions, dispatch),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AuthenticationScreen);
+export default connect(null, mapDispatchToProps)(AuthenticationScreen);

@@ -2,7 +2,7 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Provider as ReduxProvider} from 'react-redux';
-import configureStore from './redux/configureStore';
+import configureStore from 'store/configureStore';
 
 import AuthenticationScreen from './screens/authentication/AuthenticationScreen';
 import HomeScreen from './screens/home/HomeScreen';
@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator(
     Home: {screen: HomeScreen},
   },
   {
-    initalRoute: 'HomeScreen',
+    initalRoute: 'Authentication',
   },
 );
 

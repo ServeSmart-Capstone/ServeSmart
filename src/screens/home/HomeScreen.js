@@ -1,24 +1,45 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import PropTypes from 'prop-types';
+//import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+//import * as userActions from 'store/actions/userActions';
+import styles from './styles';
 
 const HomeScreen = props => {
-  console.log(props);
   return (
     <View>
-      <Text>
-        {`Signed in ${JSON.stringify(props.navigation.getParam('info'))}`}
-      </Text>
+      <Text style={{fontSize: 28}}>{`Signed in ${JSON.stringify(
+        props.user,
+      )}`}</Text>
     </View>
   );
 };
 
-HomeScreen.navigationOptions = ({navigation}) => {
-  return {
-    title: `ServeSmart - ${navigation.getParam('name')}`,
-  };
+HomeScreen.navigationOptions = ({navigation}) => ({
+  title: `ServeSmart - ${navigation.getParam('name')}`,
+  headerStyle: styles.headerStyle,
+  headerTitleStyle: styles.headerTitleStyle,
+  headerTitleAlign: 'center',
+  headerLeft: () => null,
+});
+
+HomeScreen.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-HomeScreen.propTypes = {};
+function mapStateToProps(state) {
+  const storeData = state.userReducer;
 
-export default HomeScreen;
+  return {
+    user: {
+      id: storeData.user.id,
+      name: storeData.user.name,
+    },
+  };
+}
+
+export default connect(mapStateToProps, null)(HomeScreen);
