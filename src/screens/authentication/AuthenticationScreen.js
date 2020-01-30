@@ -1,17 +1,22 @@
 import React from 'react';
 import {ImageBackground, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import PropTypes from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as loginActions from '../../redux/actions/loginActions';
 
-// import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
-// import PropTypes from 'prop-types';
-// import * as loginActions from '../../redux/actions/loginActions';
 import NumericKeypad from 'components/keypad/NumericKeypad';
 import images from 'assets/images';
 import {gradient} from './styles';
 import styles from './styles';
 
 const AuthenticationScreen = props => {
+  const emplogin = data => {
+    props.actions.login(data);
+    props.navigation.navigate('Home', {name: data.name, info: props.employee});
+  };
+
   return (
     <View style={styles.container}>
       {/* IMAGE BACKGROUND */}
@@ -33,33 +38,42 @@ const AuthenticationScreen = props => {
 
       {/* KEYPAD */}
       <View style={styles.keypadContainer}>
-        <NumericKeypad />
+        <NumericKeypad login={emplogin} />
       </View>
     </View>
   );
 };
 
-AuthenticationScreen.propTypes = {};
+AuthenticationScreen.navigationOptions = {
+  headerShown: false,
+};
 
-// function mapStateToProps(state) {
-//   const storeData = state.loginReducer;
+AuthenticationScreen.propTypes = {
+  employee: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  actions: PropTypes.object.isRequired,
+};
 
-//   return {
-//     keypad: {
-//       isOpen: storeData.keypad.isOpen,
-//     },
-//   };
-// }
+function mapStateToProps(state) {
+  const storeData = state.loginReducer;
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(loginActions, dispatch),
-//   };
-// }
+  return {
+    employee: {
+      id: storeData.employee.id,
+      name: storeData.employee.name,
+    },
+  };
+}
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(AuthenticationScreen);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(loginActions, dispatch),
+  };
+}
 
-export default AuthenticationScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AuthenticationScreen);
