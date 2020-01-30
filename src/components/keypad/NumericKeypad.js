@@ -3,6 +3,7 @@ import {Text, TouchableHighlight, View} from 'react-native';
 import KeypadButton from './KeypadButton';
 import styles from './styles';
 import colors from 'assets/colors';
+import {auth, db} from '@/constants/firebase'
 
 const NumericKeypad = () => {
   const [keypadEntry, setKeypadEntry] = useState('Enter ID');
@@ -18,8 +19,25 @@ const NumericKeypad = () => {
   };
 
   const submitEntry = event => {
-    event.preventDefault();
+    //event.preventDefault();
     // Navigate to Home
+    let userRef = db.collection('users').doc(keypadEntry);
+    let getDoc = userRef.get()
+    .then(doc => {
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        console.log('Document data:', doc.data());
+        firebase.auth().signInWithEmailAndPassword(doc.data().email, keypadEntry).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
+      }
+    })
+    .catch(err => {
+      console.log('Error getting document', err);
+    });
   };
 
   return (
