@@ -1,17 +1,22 @@
 import React from 'react';
 import {ImageBackground, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import PropTypes from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as userActions from 'store/actions/userActions';
 
-// import {bindActionCreators} from 'redux';
-// import {connect} from 'react-redux';
-// import PropTypes from 'prop-types';
-// import * as loginActions from '../../redux/actions/loginActions';
 import NumericKeypad from 'components/keypad/NumericKeypad';
 import images from 'assets/images';
 import {gradient} from './styles';
 import styles from './styles';
 
 const AuthenticationScreen = props => {
+  const userLogin = user => {
+    props.actions.loadUserData(user);
+    props.navigation.navigate('Home', {name: user.name});
+  };
+
   return (
     <View style={styles.container}>
       {/* IMAGE BACKGROUND */}
@@ -33,33 +38,26 @@ const AuthenticationScreen = props => {
 
       {/* KEYPAD */}
       <View style={styles.keypadContainer}>
-        <NumericKeypad />
+        <NumericKeypad login={userLogin} />
       </View>
     </View>
   );
 };
 
-AuthenticationScreen.propTypes = {};
+AuthenticationScreen.navigationOptions = {
+  headerShown: false,
+};
 
-// function mapStateToProps(state) {
-//   const storeData = state.loginReducer;
+AuthenticationScreen.propTypes = {
+  actions: PropTypes.shape({
+    loadUserData: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
-//   return {
-//     keypad: {
-//       isOpen: storeData.keypad.isOpen,
-//     },
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(userActions, dispatch),
+  };
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     actions: bindActionCreators(loginActions, dispatch),
-//   };
-// }
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(AuthenticationScreen);
-
-export default AuthenticationScreen;
+export default connect(null, mapDispatchToProps)(AuthenticationScreen);

@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {Text, TouchableHighlight, View} from 'react-native';
+import PropTypes from 'prop-types';
+
 import KeypadButton from './KeypadButton';
 import styles from './styles';
 import colors from 'assets/colors';
 
-const NumericKeypad = () => {
+const NumericKeypad = props => {
   const [keypadEntry, setKeypadEntry] = useState('Enter ID');
 
   const keyPressed = value => {
@@ -19,7 +21,22 @@ const NumericKeypad = () => {
 
   const submitEntry = event => {
     event.preventDefault();
-    // Navigate to Home
+    //const {login} = props.login;
+
+    //Handle authentication here
+    if (isNaN(keypadEntry)) {
+      //clear pin if invalid
+      clearEntry();
+    } else {
+      //Async obtain user data from DB if valid
+      const user = {
+        id: keypadEntry,
+        name: 'Chase Pareti',
+      };
+
+      //log user in
+      props.login(user);
+    }
   };
 
   return (
@@ -72,6 +89,10 @@ const NumericKeypad = () => {
       </View>
     </View>
   );
+};
+
+NumericKeypad.propTypes = {
+  login: PropTypes.func.isRequired,
 };
 
 export default NumericKeypad;
