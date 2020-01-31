@@ -1,25 +1,12 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
 import {Provider as ReduxProvider} from 'react-redux';
 import configureStore from 'store/configureStore';
-
-import AuthenticationScreen from './screens/authentication/AuthenticationScreen';
-import HomeScreen from './screens/home/HomeScreen';
+import MainNavigator from './navigation/MainNavigator';
 
 const store = configureStore();
 
-const AppNavigator = createStackNavigator(
-  {
-    Authentication: {screen: AuthenticationScreen},
-    Home: {screen: HomeScreen},
-  },
-  {
-    initalRoute: 'Authentication',
-  },
-);
-
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(MainNavigator);
 
 export default function App() {
   return (

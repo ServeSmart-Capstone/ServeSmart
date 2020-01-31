@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
 //import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -9,20 +9,14 @@ import styles from './styles';
 const HomeScreen = props => {
   return (
     <View>
-      <Text style={{fontSize: 28}}>{`Signed in ${JSON.stringify(
-        props.user,
-      )}`}</Text>
+      <Button
+        style={{zIndex: 4}}
+        title="open drawer"
+        onPress={() => props.navigation.toggleDrawer()}
+      />
     </View>
   );
 };
-
-HomeScreen.navigationOptions = ({navigation}) => ({
-  title: `ServeSmart - ${navigation.getParam('name')}`,
-  headerStyle: styles.headerStyle,
-  headerTitleStyle: styles.headerTitleStyle,
-  headerTitleAlign: 'center',
-  headerLeft: () => null,
-});
 
 HomeScreen.propTypes = {
   user: PropTypes.shape({
