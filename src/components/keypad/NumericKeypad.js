@@ -3,7 +3,7 @@ import {Text, TouchableHighlight, View} from 'react-native';
 import KeypadButton from './KeypadButton';
 import styles from './styles';
 import colors from 'assets/colors';
-import {auth, db} from '@/constants/firebase'
+import {auth, db} from 'constants/firebase'
 
 const NumericKeypad = () => {
   const [keypadEntry, setKeypadEntry] = useState('Enter ID');
@@ -28,10 +28,11 @@ const NumericKeypad = () => {
         console.log('No such document!');
       } else {
         console.log('Document data:', doc.data());
-        firebase.auth().signInWithEmailAndPassword(doc.data().email, keypadEntry).catch(function(error) {
+        auth.signInWithEmailAndPassword(doc.data().email, keypadEntry).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
+          console.log("Bad login\n" + errorCode +"\n" + errorMessage)
         });
       }
     })
