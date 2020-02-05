@@ -1,16 +1,27 @@
 # ServeSmart
 An intuitive solution for a modern POS platform.
 
-## Things to Note
-### Web Dependencies
-Because we are building a tablet application, and assuming nobody owns said tablet, we will run the development server in a web browser. Web dependencies have been added to the project to accomplish this.
+## Before Starting
+### Android Studio
+Because we are building a tablet application, and assuming nobody owns said tablet, we will run an AVD (Android Virtual Device) to emulate our code on a virtual tablet. These are downloaded and used with Android Studio. A step by step guide to installing and configuring Android Studio can be found [here](https://facebook.github.io/react-native/docs/getting-started). Be sure to choose the React Native CLI Quickstart tab.\
 
-## Crash Course in React Native Magic
+When prompted, you will be tasked with choosing a specific emulator. This project uses the Nexus 7 (2013 model, 7.02" screen, 1920x1200 resolution). Select landscape orientation after this.
+
+### Branching
+If you are unfamiliar with Git, please read [this guide](https://dev.to/dhruv/essential-git-commands-every-developer-should-know-2fl). Be sure to **never** work from the master branch! **Always** ensure you are working from a remote branch before starting, changing, or committing code.
+
+Run `git status` to view your current branch.\
+Run `git branch -r` to view all remote branches.\
+Run `git checkout <branch_name>` to switch to a remote branch.
+
+## Crash Course in React Native
 ### JSX
 JSX is essentially "HTML in JavaScript" and is incredibly convenient. With JSX:
-1. We create JavaScript classes (components) 
-2. Classes have a render() function which returns nested HTML representing that component
+1. We create JavaScript functions (components)
+2. Functions return nested HTML representing that component
 3. The component can now be used elsewhere in the code as a single tag </>
+
+*One thing to note is that React Native uses components rather than native HTML elements. For example, a `<div>` is replaced with `<View>` and a `<p>` is replaced with `<Text>`. You can find more about basic React Native components in the [docs](https://facebook.github.io/react-native/docs/components-and-apis#basic-components).*
 
 ### Babel
 Babel is the transpiler that converts JSX into native code. The process is as follows:
@@ -18,17 +29,14 @@ Babel is the transpiler that converts JSX into native code. The process is as fo
 2. The plain JavaScript is sent to the JS Core (a JavaScript engine built into React)
 3. The engine converts the code into IOS or Android native code
 
-This is the magic behind React Native!\
+Using these, we can write applications for iOS and Android devices with a single code base.\
 *The config file for Babel `.babel.config.js` is in the root directory. Custom presets can be added when necessary.*
 
 ## Steps for setup
-### Install Node
-If you do not have Node.js installed, download the latest version [here](https://nodejs.org/en/).
+### Install Dependencies
+As mentioned in the Android Studio guide above, you will need Node, the React Native command line interface, Python2, a JDK, and Android Studio. Python3 is also compatible.
 
-### Install Expo CLI
-Expo is the server that launches the app's development environment. Run the command `npm install -g expo-cli`. If you already have Expo installed, this command will ensure you have the latest version (do it).
-
-### Install Format and Linting Plugins
+### Configure Format and Linting Plugins
 This project uses Prettier and ESLint extensions to standardize format. This is a great way to avoid bugs down the road and keep code consistent among team members. Linters are a pain to set up and come with several configuration files; however, I've already done this.
 
 **Prettier**
@@ -43,14 +51,9 @@ If using VSCode, install the ESLint plugin (by Dirk Baeumer) for the workspace. 
 
 *The config file for ESLint `.eslintrc.json` is in the root directory. Custom rules can be added when necessary.*
 
-## Before Beginning Work
-Be sure to **never** work from the master branch! Always ensure you are working from a branch before starting or committing code.
-
 ## Run the Damn Thing!
-Scripts to run the project
+To run the project, first make sure you have the emulator open. Then run these scripts in the root directory of the project:
 ```
-cd serve-smart
-npm install
-expo start --web
+yarn install
+yarn run android
 ```
-The project will launch in the browser with the Expo Developer Tools. Wait a minute, and Webpack will launch a new tab serving the project.
