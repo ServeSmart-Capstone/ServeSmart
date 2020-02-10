@@ -1,27 +1,42 @@
+import React from 'react';
+import {Dimensions} from 'react-native';
+import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 
 import AuthenticationScreen from '../screens/authentication/AuthenticationScreen';
 import HomeScreen from '../screens/home/HomeScreen';
 import TasksScreen from '../screens/tasks/TasksScreen';
+import MenuDrawer from './drawer/MenuDrawer';
 
-const HomeNavigator = createDrawerNavigator({
-  HomeScreen,
-  TasksScreen,
-});
-
-HomeNavigator.navigationOptions = {
-  headerShown: false,
+const DrawerConfig = {
+  drawerWidth: Dimensions.get('window').width * 0.35,
+  contentComponent: ({navigation}) => {
+    return <MenuDrawer navigation={navigation} />;
+  },
+  navigationOptions: {
+    headerShown: false,
+  },
 };
+
+const HomeNavigator = createDrawerNavigator(
+  {
+    Home: {screen: HomeScreen},
+    Tasks: {screen: TasksScreen},
+  },
+  DrawerConfig,
+);
 
 const AppNavigator = createStackNavigator(
   {
     Authentication: {screen: AuthenticationScreen},
-    Home: {screen: HomeNavigator},
+    Home: HomeNavigator,
   },
   {
     initalRoute: 'Authentication',
   },
 );
 
-export default AppNavigator;
+const AppContainer = createAppContainer(AppNavigator);
+
+export default AppContainer;

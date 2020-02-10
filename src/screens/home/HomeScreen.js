@@ -1,39 +1,30 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import PropTypes from 'prop-types';
-//import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-//import * as userActions from 'store/actions/userActions';
-import styles from './styles';
+import AppBar from 'components/appbar/AppBar';
 
-const HomeScreen = props => {
+function HomeScreen(props) {
+  const openDrawer = () => {
+    props.navigation.openDrawer();
+  };
+
   return (
     <View>
-      <Button
-        style={{zIndex: 4}}
-        title="open drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
+      <AppBar onMenuPress={openDrawer} />
+      <View
+        style={{
+          paddingTop: 200,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 24}}>Tables</Text>
+      </View>
     </View>
   );
-};
-
-HomeScreen.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-function mapStateToProps(state) {
-  const storeData = state.userReducer;
-
-  return {
-    user: {
-      id: storeData.user.id,
-      name: storeData.user.name,
-    },
-  };
 }
 
-export default connect(mapStateToProps, null)(HomeScreen);
+HomeScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
+
+export default HomeScreen;
