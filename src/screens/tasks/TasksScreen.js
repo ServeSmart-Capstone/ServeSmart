@@ -1,17 +1,25 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import AppBar from 'components/appbar/AppBar';
 
-const TasksScreen = props => {
+function TasksScreen(props) {
+  function openDrawer() {
+    props.navigation.openDrawer();
+  }
+
   return (
     <View>
-      <Button
-        style={{zIndex: 4}}
-        title="open drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
-      <Text>Tasks Work</Text>
+      <AppBar onMenuPress={openDrawer} />
+      <View
+        style={{
+          paddingTop: 200,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text style={{fontSize: 24}}>Tasks</Text>
+      </View>
     </View>
   );
-};
+}
 
 export default TasksScreen;

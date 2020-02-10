@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import colors from 'assets/colors';
 
-export const gradient = [colors.lightGreen, colors.gray];
+export const gradient = [colors.lightGreen, colors.lightBlue];
 
 const styles = StyleSheet.create({
   container: {

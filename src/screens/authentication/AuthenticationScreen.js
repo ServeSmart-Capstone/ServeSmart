@@ -14,7 +14,7 @@ import styles from './styles';
 const AuthenticationScreen = props => {
   const userLogin = user => {
     props.actions.loadUserData(user);
-    props.navigation.navigate('Home', {name: user.name});
+    props.navigation.navigate('Home');
   };
 
   return (
