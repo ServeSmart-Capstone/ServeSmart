@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import React, { useState } from 'react';
+import { Text, TouchableHighlight, View } from 'react-native';
+import PropTypes from 'prop-types';
+
+import { loginMapper } from '../../helper/loginMapper';
 import KeypadButton from './KeypadButton';
 import styles from './styles';
 import colors from 'assets/colors';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
-const NumericKeypad = () => {
+const NumericKeypad = props => {
   const [keypadEntry, setKeypadEntry] = useState('Enter ID');
 
   const keyPressed = value => {
@@ -20,23 +23,24 @@ const NumericKeypad = () => {
   };
 
   const submitEntry = event => {
-    clearEntry();
-    //event.preventDefault();
+    event.preventDefault();
     // Navigate to Home
     let userRef = firestore()
       .collection('users')
       .doc(keypadEntry);
-    console.log('User Ref', userRef);
     let getDoc = userRef
       .get()
       .then(doc => {
         if (!doc.exists) {
           console.log('No such document!');
         } else {
-          console.log('Document data:', doc.data());
           auth()
             .signInWithEmailAndPassword(doc.data().email, keypadEntry)
-            .catch(function(error) {
+            .then((user) => {
+              const loginUser = loginMapper(doc, user);
+              props.login(loginUser);
+            })
+            .catch(function (error) {
               // Handle Errors here.
               var errorCode = error.code;
               var errorMessage = error.message;
@@ -47,6 +51,7 @@ const NumericKeypad = () => {
       .catch(err => {
         console.log('Error getting document', err);
       });
+    clearEntry();
   };
 
   return (
@@ -55,7 +60,7 @@ const NumericKeypad = () => {
         <Text
           style={
             keypadEntry === 'Enter ID'
-              ? [styles.idNumber, {color: colors.darkGray}]
+              ? [styles.idNumber, { color: colors.darkGray }]
               : styles.idNumber
           }>
           {keypadEntry}
@@ -99,6 +104,10 @@ const NumericKeypad = () => {
       </View>
     </View>
   );
+};
+
+NumericKeypad.propTypes = {
+  login: PropTypes.func.isRequired,
 };
 
 export default NumericKeypad;
