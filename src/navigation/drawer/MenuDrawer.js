@@ -19,7 +19,7 @@ function MenuDrawer(props) {
       <ScrollView style={styles.linkList}>
         <NavLink name="My Tables" to="Home" navigation={navigation} />
         <NavLink name="Current Tasks" to="Tasks" navigation={navigation} />
-        <NavLink name="Order Strippers" to="Tasks" navigation={navigation} />
+        <NavLink name="Exit" to="Authentication" navigation={navigation} />
       </ScrollView>
 
       <View style={styles.footer}>
