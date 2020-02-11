@@ -6,6 +6,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import AuthenticationScreen from '../screens/authentication/AuthenticationScreen';
 import HomeScreen from '../screens/home/HomeScreen';
+import TableScreen from '../screens/table/TableScreen';
 import TasksScreen from '../screens/tasks/TasksScreen';
 import MenuDrawer from './drawer/MenuDrawer';
 
@@ -19,9 +20,19 @@ const DrawerConfig = {
   },
 };
 
-const HomeNavigator = createDrawerNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {screen: HomeScreen},
+    Table: {screen: TableScreen},
+  },
+  {
+    initalRoute: 'Home',
+  },
+);
+
+const HomeNavigator = createDrawerNavigator(
+  {
+    Home: {screen: HomeStack},
     Tasks: {screen: TasksScreen},
   },
   DrawerConfig,

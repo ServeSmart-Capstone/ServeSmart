@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
   },
 
   tableContainer: {
-    margin: 5,
     height: '100%',
     backgroundColor: colors.lightGray,
     justifyContent: 'space-evenly',
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
   },
 
   tableNumber: {
-    fontSize: 20,
+    fontSize: 28,
     fontFamily: 'Roboto',
     fontWeight: 'bold',
   },

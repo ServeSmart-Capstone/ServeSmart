@@ -3,7 +3,7 @@ import colors from 'assets/colors';
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
+    height: 60,
     backgroundColor: colors.white,
     justifyContent: 'center',
     borderBottomWidth: 1,
@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
 
   headerText: {
     alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 24,
     fontFamily: 'Roboto',
   },
 
   menuIcon: {
     position: 'absolute',
-    padding: 15,
+    padding: 20,
   },
 });
 
