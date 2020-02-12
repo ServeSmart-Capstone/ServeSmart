@@ -1,7 +1,7 @@
-export const loginMapper = (userDoc, userAuth) => {
+export const loginMapper = (userAuth) => {
     return {
         id: userAuth.user.uid,
-        name: userDoc._data.name,
-        email: userDoc._data.email
+        name: userAuth.user.displayName,
+        email: userAuth.user.email
     }
 }

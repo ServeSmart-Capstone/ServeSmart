@@ -37,7 +37,7 @@ const NumericKeypad = props => {
           auth()
             .signInWithEmailAndPassword(doc.data().email, keypadEntry)
             .then((user) => {
-              const loginUser = loginMapper(doc, user);
+              const loginUser = loginMapper(user);
               props.login(loginUser);
             })
             .catch(function (error) {
