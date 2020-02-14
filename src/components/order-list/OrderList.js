@@ -1,24 +1,34 @@
 import React from 'react';
-import {FlatList, Text} from 'react-native';
+import {FlatList, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import Seat from './Seat';
 
 function OrderList(props) {
-  const {order} = props;
+  const {order, activeSeat, onSeatPress} = props;
 
   return (
     <FlatList
       style={styles.container}
       data={order.seats}
-      renderItem={({item}) => <Seat seat={item} />}
-      keyExtractor={item => item.id}
+      renderItem={({item}) => (
+        <TouchableHighlight
+          underlayColor="#898989"
+          onPress={() => {
+            onSeatPress(item);
+          }}>
+          <Seat value={item} isActive={activeSeat.number === item.number} />
+        </TouchableHighlight>
+      )}
+      keyExtractor={item => item.number.toString()}
     />
   );
 }
 
 OrderList.propTypes = {
   order: PropTypes.object.isRequired,
+  activeSeat: PropTypes.object.isRequired,
+  onSeatPress: PropTypes.func.isRequired,
 };
 
 export default OrderList;

@@ -1,18 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
 import {Text, View} from 'react-native';
+import PropTypes from 'prop-types';
 import styles from './styles';
 
 function Seat(props) {
-  const {seat} = props;
+  const {value, isActive} = props;
+  const [state, setState] = useState(value);
 
   return (
     <View style={styles.seatContainer}>
+      {/* HEADER */}
       <View style={styles.seatHeader}>
-        <Text style={styles.seatHeaderText}>Seat {seat.id}</Text>
+        <Text style={styles.seatHeaderText}>Seat {state.id}</Text>
       </View>
-      {seat.items.map(item => (
-        <View style={styles.seatItem} key={item.item}>
+
+      {/* ITEMS */}
+      {state.items.map(item => (
+        <View
+          style={[styles.seatItem, isActive ? styles.active : null]}
+          key={item.item}>
           <View style={styles.seatItemQuantity}>
             <Text style={styles.seatItemText}>{item.quantity}</Text>
           </View>
@@ -25,7 +31,8 @@ function Seat(props) {
 }
 
 Seat.propTypes = {
-  seat: PropTypes.object.isRequired,
+  value: PropTypes.object.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Seat;

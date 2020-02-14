@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     height: 32,
   },
 
+  active: {
+    backgroundColor: colors.lightBlue,
+  },
+
   seatItemText: {
     fontSize: 18,
   },

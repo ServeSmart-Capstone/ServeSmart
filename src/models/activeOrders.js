@@ -5,7 +5,7 @@ const activeOrders = [
     subtotal: 52.95,
     seats: [
       {
-        id: '1',
+        number: 1,
         items: [
           {
             item: 'Bud Light 12oz Draft',
@@ -29,7 +29,7 @@ const activeOrders = [
         ],
       },
       {
-        id: '2',
+        number: 2,
         items: [
           {
             item: 'Chateau Ste. Michelle Cabernet Sauvignon 2017 6oz',

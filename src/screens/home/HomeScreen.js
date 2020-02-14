@@ -17,7 +17,7 @@ function HomeScreen(props) {
   const openTable = tableNumber => {
     const table = activeTables.find(table => table.id === tableNumber);
     const order = activeOrders.find(order => order.id === tableNumber);
-    navigation.navigate('Table', {table: table, order: order});
+    navigation.navigate('Table', {order: order});
   };
 
   return (
