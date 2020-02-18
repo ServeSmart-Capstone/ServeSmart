@@ -5,6 +5,7 @@ An intuitive solution for a modern POS platform.
 ### Android Studio
 Because we are building a tablet application, and assuming nobody owns said tablet, we will run an AVD (Android Virtual Device) to emulate our code on a virtual tablet. These are downloaded and used with Android Studio. A step by step guide to installing and configuring Android Studio can be found [here](https://facebook.github.io/react-native/docs/getting-started). Be sure to choose the React Native CLI Quickstart tab.\
 
+### Specific Emulator
 When prompted, you will be tasked with choosing a specific emulator. This project uses the Nexus 7 (2013 model, 7.02" screen, 1920x1200 resolution). Select landscape orientation after this.
 
 ### Branching
