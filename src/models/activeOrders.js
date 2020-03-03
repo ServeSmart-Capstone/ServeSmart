@@ -1,52 +1,39 @@
 const activeOrders = [
   {
-    id: 1,
+    host: '46j4b6j47j254j2',
+    id: '356jkb9nc29tn7b',
+    tableNumber: 1,
     guests: 2,
     subtotal: 52.95,
-    seats: [
-      {
-        number: 1,
-        items: [
-          {
-            item: 'Bud Light 12oz Draft',
-            displayName: 'Bud Lt Draft',
-            quantity: 2,
-            price: 3.99,
-          },
-          {
-            item: 'Water',
-            displayName: 'Water',
-            quantity: 1,
-            price: 0.0,
-          },
-          {
-            item: 'Pork Chop 8oz',
-            displayName: 'Pork Chop',
-            quantity: 1,
-            price: 16.99,
-            instructions: ['Medium-well', 'Extra potatoes'],
-          },
-        ],
-      },
-      {
-        number: 2,
-        items: [
-          {
-            item: 'Chateau Ste. Michelle Cabernet Sauvignon 2017 6oz',
-            displayName: 'Ste. Michelle 6oz',
-            quantity: 1,
-            price: 8.99,
-          },
-          {
-            item: 'Alaskan Salmon Filet 7oz',
-            displayName: 'Salmon',
-            quantity: 1,
-            price: 18.99,
-            instructions: ['Medium', 'No skin', 'Light sauce'],
-          },
-        ],
-      },
-    ],
+    seats: {
+      '0': [],
+      '1': [
+        {
+          item: '',
+          quantity: 2,
+        },
+        {
+          item: '',
+          quantity: 1,
+        },
+        {
+          item: '',
+          quantity: 1,
+          instructions: ['Medium-well', 'Extra potatoes'],
+        },
+      ],
+      '2': [
+        {
+          item: '',
+          quantity: 1,
+        },
+        {
+          item: '',
+          quantity: 1,
+          instructions: ['Medium', 'No skin', 'Light sauce'],
+        },
+      ],
+    },
   },
 ];
 

@@ -11,11 +11,11 @@ function Seat(props) {
     <View style={styles.seatContainer}>
       {/* HEADER */}
       <View style={styles.seatHeader}>
-        <Text style={styles.seatHeaderText}>Seat {state.id}</Text>
+        <Text style={styles.seatHeaderText}>Seat {state.seat}</Text>
       </View>
 
       {/* ITEMS */}
-      {state.items.map(item => (
+      {state.map(item => (
         <View
           style={[styles.seatItem, isActive ? styles.active : null]}
           key={item.item}>

@@ -10,17 +10,17 @@ function OrderList(props) {
   return (
     <FlatList
       style={styles.container}
-      data={order.seats}
+      data={order.items}
       renderItem={({item}) => (
         <TouchableHighlight
           underlayColor="#898989"
           onPress={() => {
             onSeatPress(item);
           }}>
-          <Seat value={item} isActive={activeSeat.number === item.number} />
+          <Seat value={item} isActive={activeSeat.number === item.seat} />
         </TouchableHighlight>
       )}
-      keyExtractor={item => item.number.toString()}
+      keyExtractor={item => item.seat.toString()}
     />
   );
 }
