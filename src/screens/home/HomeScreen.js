@@ -5,6 +5,7 @@ import AppBar from 'components/appbar/AppBar';
 import styles from './styles';
 import colors from 'assets/colors';
 
+
 function HomeScreen(props) {
   const openDrawer = () => {
     props.navigation.openDrawer();

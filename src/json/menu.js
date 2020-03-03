@@ -1,6 +1,6 @@
 export const menu = [
     {
-        category: "drinks",
+        category: "beverages",
         drinks: [
             {
                 name: "Coke", 
@@ -10,6 +10,14 @@ export const menu = [
                 name: "Water",
                 price: 0.00
             },
+            {
+                name: "Iced Tea",
+                price: 1.99
+            },
+            {
+                name: "Corona",
+                price: 2.69
+            }
         ]
     },
     {
@@ -23,83 +31,53 @@ export const menu = [
                 name: "Calamari",
                 price: 8.69,
             },
+            {
+                name: "Bread Sticks",
+                price: 2.99
+            }
+        ]
+    },
+    {
+        category: "Sides",
+        appetizers:[
+            {
+                name: "French Fries", 
+                price: 2.99,
+            },
+            {
+                name: "Potatos",
+                price: 2.99,
+            },
+            {
+                name: "Chips",
+                price: 2.99
+            }
         ]
     },
     {
         category: "entrees",
         entrees:[
             {
-                name: "Coke", 
-                price: 2.60,
+                name: "Hamburger", 
+                price: 9.60,
             },
             {
-                name: "Water",
-                price: 0.00
+                name: "Steak",
+                price: 13.28
             },
         ]
-    }
+    },
+    {
+        category: "desserts",
+        entrees:[
+            {
+                name: "Chocolate Cake", 
+                price: 6.60,
+            },
+            {
+                name: "Ice Cream",
+                price: 2.35
+            },
+        ]
+    },
     ]
-        // {
-        //     name: "Coke",
-        //     category: 0
-        // },
-        // {
-        //     name: "Pepsi",
-        //     category: 0
-        // },
-        // {
-        //     name: "Water",
-        //     category: 0
-        // },
-        // {
-        //     name: "Iced Tea",
-        //     category: 0
-        // },
-        // {
-        //     name: "Coffee",
-        //     category: 0
-        // },
-        // {
-        //     name: "Margarita",
-        //     category: 0
-        // },
-        // {
-        //     name: "Beer Tap",
-        //     category: 0
-        // },
-        // {
-        //     name: "Hamburger",
-        //     category: 4
-        // },
-        // {
-        //     name: "Fries",
-        //     category: 3
-        // },
-        // {
-        //     name: "Pizza",
-        //     category: 4
-        // },
-        // {
-        //     name:  "Salad",
-        //     category: 3
-        // },
-        // {
-        //     name: "Onion Rings",
-        //     category: 3
-        // },
-        // {
-        //     name: "Calamari",
-        //     category: 2
-        // },
-        // {
-        //     name: "Ice Cream",
-        //     category: 4
-        // },
-        // {
-        //     name: "Coleslaw",
-        //     category: 2
-        // },
-        // {
-        //     name: "Chicken Wings",
-        //     category: 1
-        // }
