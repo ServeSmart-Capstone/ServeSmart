@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Text, TextInput, TouchableHighlight, View } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as userActions from 'store/actions/userActions';
+import { Text, TextInput, TouchableHighlight, View, Modal, ScrollView, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 import AppBar from 'components/appbar/AppBar';
 import styles from './styles';
-import colors from 'assets/colors';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-
-
+import { emailValidator } from '../../helper/validators';
+import { loginMapper } from '../../helper/loginMapper';
 
 function SettingsScreen(props) {
     const [displayName, setDisplayName] = useState('');
     const [isAdmin, setIsAdmin] = useState('');
+    const [createAccountEmail, setCreateAccountEmail] = useState('');
+    const [createAccountPassword, setCreateAccountPassword] = useState('');
+    const [createAccountName, setCreateAccountName] = useState('');
+    const [modalText, setModalText] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
     const [order, setOrder] = useState({});
     const user = auth().currentUser;
 
@@ -21,6 +28,9 @@ function SettingsScreen(props) {
         setupCurrentUser(user);
     }, [])
 
+    const updateUserObject = user => {
+        props.actions.loadUserData(user);
+    };
 
     // Initialize User values from Firebase
     const setupCurrentUser = (_user) => {
@@ -57,12 +67,63 @@ function SettingsScreen(props) {
     const submitForm = () => {
         if (user.displayName !== displayName) {
             user.updateProfile({ displayName })
-                .then(() => { console.log('Updated Display Name') })
+                .then(() => { 
+                    console.log('Updated Display Name');
+                    let updatedUser = {
+                        id: user.uid,
+                        name: displayName,
+                        email: user.email
+                    }
+                    updateUserObject(updatedUser);
+                })
                 .catch(() => { console.log('Unable to Update Display Name') });
         } else {
             console.log('No change to Display Name so nothing was updated');
         }
     };
+
+    const createAccount = () => {
+        if (!createAccountEmail || !createAccountPassword || !createAccountName) {
+            console.log('Need to fill out all fields!');
+            updateWarningModal('Need to fill out all fields!');
+            return;
+        }
+
+        if (createAccountPassword.length < 6) {
+            console.log('Password needs to be at least 6 numbers');
+            updateWarningModal('Password needs to be at least 6 numbers');
+            return;
+        }
+
+        if (!emailValidator(createAccountEmail)) {
+            console.log('Email is not valid, try again');
+            updateWarningModal('Email is not valid, try again');
+            return;
+        }
+
+        auth().createUserWithEmailAndPassword(createAccountEmail, createAccountPassword).then((createdUser) => {
+            console.log(createdUser)
+            firestore().collection('users').doc(createAccountPassword)
+                .set({
+                    admin: false,
+                    authid: createdUser.user.uid,
+                    email: createAccountEmail,
+                    name: createAccountName
+                }).then(() => {
+                    console.log('Success, created user');
+                    setCreateAccountEmail('');
+                    setCreateAccountPassword('');
+                    setCreateAccountName('');
+                });
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const updateWarningModal = (text) => {
+        setModalText(text);
+        setModalVisible(true);
+    }
 
     const openDrawer = () => {
         props.navigation.openDrawer();
@@ -74,9 +135,9 @@ function SettingsScreen(props) {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-500} behavior="padding">
             <AppBar onMenuPress={openDrawer} />
-            <View style={styles.inputContainer}>
+            <ScrollView style={styles.inputContainer}>
                 {/* {Each row contains text and a text input} */}
                 <View style={styles.inputRow}>
                     <Text style={styles.textStyle}>Display Name</Text>
@@ -96,9 +157,77 @@ function SettingsScreen(props) {
                         autoCapitalize={'characters'}
                     ></TextInput>
                 </View>
-                <TouchableHighlight style={styles.submitButton} onPress={submitForm}>
-                    <Text style={styles.sumbitText}>Submit</Text>
-                </TouchableHighlight>
+                <View style={styles.submitRow}>
+                    <TouchableHighlight style={styles.submitButton} onPress={submitForm}>
+                        <Text style={styles.sumbitText}>Submit</Text>
+                    </TouchableHighlight>
+                </View>
+
+                {isAdmin ?
+                    <View>
+                        <View style={styles.adminHeader}>
+                            <Text style={styles.textStyle}>
+                                Admin Panel
+                            </Text>
+                        </View>
+                        <View style={styles.inputRow}>
+                            <Text style={styles.textStyle}>Email</Text>
+                            <TextInput style={styles.inputStyle}
+                                placeholder={'Enter Email'}
+                                value={createAccountEmail}
+                                onChangeText={(text) => setCreateAccountEmail(text)}
+                            ></TextInput>
+                        </View>
+                        <View style={styles.inputRow}>
+                            <Text style={styles.textStyle}>Password</Text>
+                            <TextInput style={styles.inputStyle}
+                                placeholder={'Enter Password (6 digits or more)'}
+                                secureTextEntry={true}
+                                onChangeText={(text) => setCreateAccountPassword(text)}
+                                value={createAccountPassword}
+                            ></TextInput>
+                        </View>
+                        <View style={styles.inputRow}>
+                            <Text style={styles.textStyle}>Name</Text>
+                            <TextInput style={styles.inputStyle}
+                                placeholder={'Enter your name'}
+                                onChangeText={(text) => setCreateAccountName(text)}
+                                value={createAccountName}
+                            ></TextInput>
+                        </View>
+                        <View style={styles.submitRow}>
+                            <TouchableHighlight style={styles.submitButton} onPress={createAccount}>
+                                <Text style={styles.sumbitText}>Create User</Text>
+                            </TouchableHighlight>
+                        </View>
+                        {/* <View style={{ flex: 1 }} /> */}
+                    </View>
+                    : null}
+
+                <View style={{ marginTop: 22 }}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert('Modal has been closed.');
+                        }}>
+                        <View style={styles.warningModalStyle}>
+                            <View>
+                                <Text style={styles.sumbitText}>{modalText}</Text>
+
+                                <TouchableHighlight
+                                    onPress={() => {
+                                        setModalVisible(!modalVisible);
+                                    }}>
+                                    <Text style={styles.sumbitText}>Hide Modal</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+
+
 
                 {/* Grab some metadata about an order from Firestore */}
                 {/* <View style={styles.inputRow}>
@@ -121,13 +250,22 @@ function SettingsScreen(props) {
                         </View>
                     );
                 })} */}
-            </View>
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 
 SettingsScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
+    actions: PropTypes.shape({
+        loadUserData: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
-export default SettingsScreen;
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(userActions, dispatch),
+    };
+}
+
+export default connect(null, mapDispatchToProps)(SettingsScreen);

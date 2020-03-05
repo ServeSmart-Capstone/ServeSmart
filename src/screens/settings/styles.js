@@ -11,6 +11,14 @@ const styles = StyleSheet.create({
     },
     inputRow: {
         flexDirection: 'row',
+        paddingBottom: 5
+    },
+    adminHeader: {
+        flexDirection: 'row',
+        paddingTop: 10
+    },
+    submitRow: {
+        alignItems: 'center'
     },
     textStyle: {
         flex: 1,
@@ -31,10 +39,14 @@ const styles = StyleSheet.create({
         borderColor: colors.black,
         borderStyle: 'solid',
         borderRadius: 5,
-        padding: 10
+        padding: 10,
     },
     sumbitText: {
         textAlign: 'center'
+    },
+    warningModalStyle: {
+        marginTop: 200,
+        backgroundColor: 'red'
     }
 });
 
