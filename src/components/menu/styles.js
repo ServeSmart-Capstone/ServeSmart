@@ -3,22 +3,28 @@ import colors from 'assets/colors';
 
 const styles = StyleSheet.create({
   container: {
-    height: 40,
-    backgroundColor: colors.white,
+    flexDirection: 'row',
+  },
+
+  categoryColumn: {
+    width: '50%',
+  },
+
+  category: {
+    height: 75,
+    alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgray',
+    borderWidth: 1,
+    borderColor: colors.black,
+    backgroundColor: colors.lightBlue,
+    borderRadius: 10,
+    margin: 10,
   },
 
-  headerText: {
-    alignSelf: 'center',
+  buttonText: {
     fontSize: 20,
+    color: colors.white,
     fontFamily: 'Roboto',
-  },
-
-  menuIcon: {
-    position: 'absolute',
-    padding: 15,
   },
 });
 

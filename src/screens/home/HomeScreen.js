@@ -7,7 +7,6 @@ import AppBar from 'components/appbar/AppBar';
 import styles from './styles';
 import colors from 'assets/colors';
 
-
 function HomeScreen(props) {
   const {navigation, tables, orders} = props;
 
@@ -17,6 +16,7 @@ function HomeScreen(props) {
 
   const openTable = tableNumber => {
     const table = tables.find(table => table.tableNumber === tableNumber);
+    // Check if the table is locally active (owned by user)
     if (table) {
       const order = orders.find(order => order.tableNumber === tableNumber);
       navigation.navigate('Table', {order: order ? order : {}});

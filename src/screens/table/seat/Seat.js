@@ -4,25 +4,26 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 function Seat(props) {
-  const {value, isActive} = props;
-  const [state, setState] = useState(value);
+  const {data, isActive} = props;
 
   return (
     <View style={styles.seatContainer}>
       {/* HEADER */}
       <View style={styles.seatHeader}>
-        <Text style={styles.seatHeaderText}>Seat {state.seat}</Text>
+        <Text style={styles.seatHeaderText}>
+          {data.seatNumber === 0 ? 'Table' : `Seat ${data.seatNumber}`}
+        </Text>
       </View>
 
       {/* ITEMS */}
-      {state.map(item => (
+      {data.items.map(item => (
         <View
           style={[styles.seatItem, isActive ? styles.active : null]}
-          key={item.item}>
+          key={item.name}>
           <View style={styles.seatItemQuantity}>
             <Text style={styles.seatItemText}>{item.quantity}</Text>
           </View>
-          <Text style={styles.seatItemName}>{item.displayName}</Text>
+          <Text style={styles.seatItemName}>{item.name}</Text>
           <Text style={styles.seatItemPrice}>{item.price.toFixed(2)}</Text>
         </View>
       ))}
@@ -31,7 +32,7 @@ function Seat(props) {
 }
 
 Seat.propTypes = {
-  value: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 
