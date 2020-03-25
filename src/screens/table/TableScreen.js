@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   FlatList,
+  ImageBackground,
   ScrollView,
   TouchableHighlight,
   Text,
@@ -13,6 +14,7 @@ import * as tableActions from 'store/actions/tableActions';
 
 import Menu from 'components/menu/Menu';
 import Seat from './seat/Seat';
+import images from 'assets/images';
 import colors from 'assets/colors';
 import styles from './styles';
 
@@ -62,6 +64,12 @@ function TableScreen(props) {
 
   return (
     <View style={styles.container}>
+      {/* IMAGE BACKGROUND */}
+      <ImageBackground
+        style={styles.imageBackground}
+        source={images.authscreen_background}
+      />
+
       {/* ORDER LIST */}
       <View style={styles.orderList}>
         <FlatList
@@ -113,6 +121,7 @@ function TableScreen(props) {
             <Text>???</Text>
           </TouchableHighlight>
         </View>
+
         <ScrollView>
           <Menu />
         </ScrollView>

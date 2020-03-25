@@ -6,13 +6,13 @@ const styles = StyleSheet.create({
     height: 32,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.darkGray,
+    backgroundColor: colors.lightBlue,
   },
 
   seatHeaderText: {
     fontSize: 18,
-    fontWeight: 'bold',
     fontFamily: 'Roboto',
+    color: colors.black,
   },
 
   seatItem: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 
   active: {
-    backgroundColor: colors.lightBlue,
+    backgroundColor: colors.lightGray,
   },
 
   seatItemText: {
