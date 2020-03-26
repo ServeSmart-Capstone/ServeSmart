@@ -1,6 +1,8 @@
 import {StyleSheet} from 'react-native';
 import colors from 'assets/colors';
 
+export const gradient = [colors.lightGray, colors.white];
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -34,12 +36,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  quickControlButton: {
+  quickControlContainer: {
     width: '20%',
-    alignItems: 'center',
-    justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.darkGray,
+  },
+
+  quickControlButton: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  quickControlText: {
+    fontSize: 16,
   },
 });
 

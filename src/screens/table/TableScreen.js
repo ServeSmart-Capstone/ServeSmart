@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -16,6 +17,7 @@ import Menu from 'components/menu/Menu';
 import Seat from './seat/Seat';
 import images from 'assets/images';
 import colors from 'assets/colors';
+import {gradient} from './styles';
 import styles from './styles';
 
 function TableScreen(props) {
@@ -90,36 +92,70 @@ function TableScreen(props) {
       {/* TABLE CONTROLS */}
       <View style={styles.tableControls}>
         <View style={styles.quickControlBar}>
-          <TouchableHighlight
-            style={styles.quickControlButton}
-            underlayColor={colors.lightGreen}
-            onPress={() => {}}>
-            <Text>Add One</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.quickControlButton}
-            underlayColor={colors.lightGreen}
-            onPress={() => {}}>
-            <Text>Remove</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.quickControlButton}
-            underlayColor={colors.lightGreen}
-            onPress={() => {}}>
-            <Text>Split Check</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.quickControlButton}
-            underlayColor={colors.lightGreen}
-            onPress={() => {}}>
-            <Text>Apply Promo</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.quickControlButton}
-            underlayColor={colors.lightGreen}
-            onPress={() => {}}>
-            <Text>???</Text>
-          </TouchableHighlight>
+          <LinearGradient
+            style={styles.quickControlContainer}
+            colors={gradient}
+            start={{x: 1, y: 0}}
+            end={{x: 1, y: 1}}>
+            <TouchableHighlight
+              style={styles.quickControlButton}
+              underlayColor={colors.lightGreen}
+              onPress={() => {}}>
+              <Text style={styles.quickControlText}>Duplicate</Text>
+            </TouchableHighlight>
+          </LinearGradient>
+
+          <LinearGradient
+            style={styles.quickControlContainer}
+            colors={gradient}
+            start={{x: 1, y: 0}}
+            end={{x: 1, y: 1}}>
+            <TouchableHighlight
+              style={styles.quickControlButton}
+              underlayColor={colors.lightGreen}
+              onPress={() => {}}>
+              <Text style={styles.quickControlText}>Remove</Text>
+            </TouchableHighlight>
+          </LinearGradient>
+
+          <LinearGradient
+            style={styles.quickControlContainer}
+            colors={gradient}
+            start={{x: 1, y: 0}}
+            end={{x: 1, y: 1}}>
+            <TouchableHighlight
+              style={styles.quickControlButton}
+              underlayColor={colors.lightGreen}
+              onPress={() => {}}>
+              <Text style={styles.quickControlText}>Split Check</Text>
+            </TouchableHighlight>
+          </LinearGradient>
+
+          <LinearGradient
+            style={styles.quickControlContainer}
+            colors={gradient}
+            start={{x: 1, y: 0}}
+            end={{x: 1, y: 1}}>
+            <TouchableHighlight
+              style={styles.quickControlButton}
+              underlayColor={colors.lightGreen}
+              onPress={() => {}}>
+              <Text style={styles.quickControlText}>Apply Promo</Text>
+            </TouchableHighlight>
+          </LinearGradient>
+
+          <LinearGradient
+            style={styles.quickControlContainer}
+            colors={gradient}
+            start={{x: 1, y: 0}}
+            end={{x: 1, y: 1}}>
+            <TouchableHighlight
+              style={styles.quickControlButton}
+              underlayColor={colors.lightGreen}
+              onPress={() => {}}>
+              <Text style={styles.quickControlText}>???</Text>
+            </TouchableHighlight>
+          </LinearGradient>
         </View>
 
         <ScrollView>
