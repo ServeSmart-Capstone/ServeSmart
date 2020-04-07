@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableHighlight, Text, View} from 'react-native';
+import Beverages from './beverages/Beverages';
 import PropTypes from 'prop-types';
 import colors from 'assets/colors';
 import styles from './styles';
@@ -20,7 +21,7 @@ function Menu() {
   const renderMenuSection = () => {
     switch (visibleSection) {
       case 'Beverages':
-        return <Text>Beverages</Text>;
+        return <Beverages style={{height: '100%'}} />;
       default:
         return menuCategories.map(category => (
           <View style={styles.categoryContainer} key={category}>
