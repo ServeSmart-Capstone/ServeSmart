@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import React, { useState } from 'react';
+import { Text, TouchableHighlight, View } from 'react-native';
 import PropTypes from 'prop-types';
 
+import { loginMapper } from '../../helper/loginMapper';
 import KeypadButton from './KeypadButton';
 import styles from './styles';
 import colors from 'assets/colors';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const NumericKeypad = props => {
   const [keypadEntry, setKeypadEntry] = useState('Enter ID');
@@ -21,22 +24,34 @@ const NumericKeypad = props => {
 
   const submitEntry = event => {
     event.preventDefault();
-    //const {login} = props.login;
-
-    //Handle authentication here
-    if (isNaN(keypadEntry)) {
-      //clear pin if invalid
-      clearEntry();
-    } else {
-      //Async obtain user data from DB if valid
-      const user = {
-        id: keypadEntry,
-        name: 'Chase',
-      };
-
-      //log user in
-      props.login(user);
-    }
+    // Navigate to Home
+    let userRef = firestore()
+      .collection('users')
+      .doc(keypadEntry);
+    let getDoc = userRef
+      .get()
+      .then(doc => {
+        if (!doc.exists) {
+          console.log('No such document!');
+        } else {
+          auth()
+            .signInWithEmailAndPassword(doc.data().email, keypadEntry)
+            .then((user) => {
+              const loginUser = loginMapper(user);
+              props.login(loginUser);
+            })
+            .catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              console.log('Bad login\n' + errorCode + '\n' + errorMessage);
+            });
+        }
+      })
+      .catch(err => {
+        console.log('Error getting document', err);
+      });
+    clearEntry();
   };
 
   return (
@@ -45,7 +60,7 @@ const NumericKeypad = props => {
         <Text
           style={
             keypadEntry === 'Enter ID'
-              ? [styles.idNumber, {color: colors.darkGray}]
+              ? [styles.idNumber, { color: colors.darkGray }]
               : styles.idNumber
           }>
           {keypadEntry}

@@ -4,6 +4,7 @@ const initialState = {
   user: {
     id: '',
     name: '',
+    email: ''
   },
 };
 
@@ -17,6 +18,7 @@ export default function userReducer(state = initialState, action) {
           ...state.user,
           id: action.userData.id,
           name: action.userData.name,
+          email: action.userData.email
         },
       };
     }

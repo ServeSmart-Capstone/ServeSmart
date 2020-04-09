@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 function MenuDrawer(props) {
   const {navigation, user} = props;
+  console.log(user);
 
   return (
     <View style={styles.container}>
@@ -19,6 +20,7 @@ function MenuDrawer(props) {
       <ScrollView style={styles.linkList}>
         <NavLink name="My Tables" to="Home" navigation={navigation} />
         <NavLink name="Current Tasks" to="Tasks" navigation={navigation} />
+        <NavLink name="Settings" to="Settings" navigation={navigation} />
         <NavLink name="Exit" to="Authentication" navigation={navigation} />
       </ScrollView>
 
@@ -43,6 +45,8 @@ function mapStateToProps(state) {
   return {
     user: {
       name: storeData.user.name,
+      id: storeData.user.id,
+      email: storeData.user.email
     },
   };
 }
