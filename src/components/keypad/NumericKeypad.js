@@ -31,7 +31,7 @@ const NumericKeypad = props => {
       //Async obtain user data from DB if valid
       const user = {
         id: keypadEntry,
-        name: 'Chase',
+        name: 'Brian',
       };
 
       //log user in

@@ -23,6 +23,7 @@ import styles from './styles';
 function TableScreen(props) {
   const {navigation} = props;
   const [order, setOrder] = useState(navigation.getParam('order'));
+  const [nav, setNav] = useState(navigation.getParam('navigation'));
   const [activeSeat, setActiveSeat] = useState({});
 
   const seatHasBeenSelected = () => {
@@ -113,7 +114,7 @@ function TableScreen(props) {
             <TouchableHighlight
               style={styles.quickControlButton}
               underlayColor={colors.lightGreen}
-              onPress={() => {}}>
+              onPress={() => navigation.openDrawer()}>
               <Text style={styles.quickControlText}>Remove</Text>
             </TouchableHighlight>
           </LinearGradient>
@@ -153,7 +154,7 @@ function TableScreen(props) {
               style={styles.quickControlButton}
               underlayColor={colors.lightGreen}
               onPress={() => {}}>
-              <Text style={styles.quickControlText}>???</Text>
+              <Text style={styles.quickControlText}>Payout</Text>
             </TouchableHighlight>
           </LinearGradient>
         </View>
@@ -176,4 +177,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(TableScreen);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(TableScreen);
